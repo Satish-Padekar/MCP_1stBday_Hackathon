@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: MCP Core API
+  version: '1.0.0'
+  description: API for MCP Core — curriculum, practice, checking, progress
+servers:
+  - url: http://localhost:8000/api
+paths:
+  /curriculum:
+    get:
+      summary: Fetch curriculum topics
+      parameters:
+        - in: query
+          name: grade
+          schema:
+            type: string
+        - in: query
+          name: subject
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful
+  /practice:
+    post:
+      summary: Generate practice set
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic_id:
+                  type: string
+                difficulty:
+                  type: string
+                count:
+                  type: integer
+      responses:
+        '200':
+          description: ok
+  /check:
+    post:
+      summary: Check homework
+      requestBody:
+        required: true
+      responses:
+        '200':
+          description: ok
+  /progress:
+    get:
+      summary: Get progress
+      parameters:
+        - in: query
+          name: student_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
